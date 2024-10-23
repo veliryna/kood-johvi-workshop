@@ -10,13 +10,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @ExtendWith(ScreenshotOnFailureExtension.class)
 public class ProductPageTest {
 
-
+    private static final Logger logger = LoggerFactory.getLogger(ProductPageTest.class);
     private WebDriver driver;
     private ProductPage productPage;
     private ScreenshotOnFailureExtension screenshotExtension;
@@ -41,6 +44,7 @@ public class ProductPageTest {
     @Test
     @Description("Test Case: Verify that a user can add a product to the shopping cart.")
     public void testAddProductToCart() {
+        logger.info("Product page Test");
         productPage.addProductToCart();
         productPage.openCart();
         WebElement cartItem = driver.findElement(By.className("inventory_item_name"));
