@@ -8,14 +8,18 @@ import com.automation.utils.ScreenshotOnFailureExtension;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Optional;
 import static com.automation.utils.DriverFactory.driver;
 
 @ExtendWith(ScreenshotOnFailureExtension.class)
 public class LoginTest {
-
+    private static final Logger logger = LoggerFactory.getLogger(LoginTest.class);
     @BeforeEach
     public void setup(){
+        logger.info("Browser setup for each tests");
         String browser = ConfigReader.getProperty("browser");
         driver = DriverFactory.initializeDriver(browser);
         driver.get(ConfigReader.getProperty("baseUrl"));
@@ -23,6 +27,7 @@ public class LoginTest {
 
     @AfterEach
     public void tearDown() {
+        logger.info("Browser tear down after each tests");
         DriverFactory.quitDriver(driver);
     }
 
